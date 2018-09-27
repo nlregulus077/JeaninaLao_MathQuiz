@@ -19,6 +19,9 @@ namespace JeaninaLao_MathQuiz
         int addend1;
         int addend2;
 
+        // Timer
+        int timeLeft;
+
         // Start the quiz method
         public void StartTheQuiz()
         {
@@ -32,12 +35,37 @@ namespace JeaninaLao_MathQuiz
 
             // Sum is 0 by default
             sum.Value = 0;
+
+            // Start the timer
+            timeLeft = 30;
+            timeLabel.Text = "30 seconds";
+            timer1.Start();
         }
 
+        // start quiz
         private void startButton_Click(object sender, EventArgs e)
         {
             StartTheQuiz();
             startButton.Enabled = false;
+        }
+
+        // tick, tock, tick, tock...
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (timeLeft > 0)
+            {
+                timeLeft -= 1;
+                timeLabel.Text = timeLeft + " seconds";
+            }
+
+            else
+            {
+                timer1.Stop();
+                timeLabel.Text = "Time's Up!";
+                MessageBox.Show("Sorry, but you didn't finish in time.  Better luck next time.");
+                sum.Value = addend1 + addend2;
+                startButton.Enabled = true;
+            }
         }
 
 
