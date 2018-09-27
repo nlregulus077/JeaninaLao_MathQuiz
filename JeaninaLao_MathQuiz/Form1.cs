@@ -62,7 +62,7 @@ namespace JeaninaLao_MathQuiz
             {
                 timer1.Stop();
                 timeLabel.Text = "Time's Up!";
-                MessageBox.Show("Sorry, but you didn't finish in time.  Better luck next time.");
+                MessageBox.Show("Sorry, but you didn't finish in time.  Try again.");
                 sum.Value = addend1 + addend2;
                 startButton.Enabled = true;
             }
