@@ -19,6 +19,10 @@ namespace JeaninaLao_MathQuiz
         int addend1;
         int addend2;
 
+        // Storing subtraction values
+        int minuend;
+        int subtrahend;
+
         // Timer
         int timeLeft;
 
@@ -35,6 +39,13 @@ namespace JeaninaLao_MathQuiz
 
             // Sum is 0 by default
             sum.Value = 0;
+
+            // Subtraction problem
+            minuend = randomizer.Next(1, 101);
+            subtrahend = randomizer.Next(1, minuend);
+            minusLeftLabel.Text = minuend.ToString();
+            minusRightLabel.Text = subtrahend.ToString();
+            difference.Value = 0;
 
             // Start the timer
             timeLeft = 30;
@@ -71,6 +82,7 @@ namespace JeaninaLao_MathQuiz
                 timeLabel.Text = "Time's Up!";
                 MessageBox.Show("Sorry, but you didn't finish in time.  Try again.");
                 sum.Value = addend1 + addend2;
+                difference.Value = minuend - subtrahend;
                 startButton.Enabled = true;
             }
         }
@@ -78,7 +90,7 @@ namespace JeaninaLao_MathQuiz
         // checks math answers
         private bool CheckTheAnswer()
         {
-            if (addend1 + addend2 == sum.Value)
+            if ((addend1 + addend2 == sum.Value) && (minuend - subtrahend == difference.Value))
                 return true;
             else
                 return false;
