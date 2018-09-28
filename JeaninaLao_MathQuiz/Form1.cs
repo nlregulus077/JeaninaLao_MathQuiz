@@ -52,9 +52,16 @@ namespace JeaninaLao_MathQuiz
         // tick, tock, tick, tock...
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (timeLeft > 0)
+            if (CheckTheAnswer())
             {
-                timeLeft -= 1;
+                timer1.Stop();
+                MessageBox.Show("Congratulations! You're a know it all!");
+                startButton.Enabled = true;
+            }
+            
+            else if (timeLeft > 0)
+            {
+                timeLeft--;
                 timeLabel.Text = timeLeft + " seconds";
             }
 
@@ -68,6 +75,16 @@ namespace JeaninaLao_MathQuiz
             }
         }
 
+        // checks math answers
+        private bool CheckTheAnswer()
+        {
+            if (addend1 + addend2 == sum.Value)
+                return true;
+            else
+                return false;
+            
+        }
+
 
         // I don't need this stuff
         public Form1()
@@ -75,16 +92,15 @@ namespace JeaninaLao_MathQuiz
             InitializeComponent();
         }
 
-        private void label13_Click(object sender, EventArgs e)
+        private void answer_Enter(object sender, EventArgs e)
         {
+            NumericUpDown answerBox = sender as NumericUpDown;
 
+            if (answerBox != null)
+            {
+                int lengthOfAnswer = answerBox.Value.ToString().Length;
+                answerBox.Select(0, lengthOfAnswer);
+            }
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        
     }
 }
