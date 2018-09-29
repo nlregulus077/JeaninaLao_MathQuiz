@@ -23,6 +23,14 @@ namespace JeaninaLao_MathQuiz
         int minuend;
         int subtrahend;
 
+        // Store multiplication values
+        int multiplicand;
+        int multiplier;
+
+        // Store division values
+        int dividend;
+        int divisor;
+
         // Timer
         int timeLeft;
 
@@ -46,6 +54,21 @@ namespace JeaninaLao_MathQuiz
             minusLeftLabel.Text = minuend.ToString();
             minusRightLabel.Text = subtrahend.ToString();
             difference.Value = 0;
+
+            // Multiplication problem
+            multiplicand = randomizer.Next(2, 11);
+            multiplier = randomizer.Next(2, 11);
+            timesLeftLabel.Text = multiplicand.ToString();
+            timesRightLabel.Text = multiplier.ToString();
+            product.Value = 0;
+
+            // Division problem
+            divisor = randomizer.Next(2, 11);
+            int temporaryQuotient = randomizer.Next(2, 11);
+            dividend = divisor * temporaryQuotient;
+            dividedLeftLabel.Text = dividend.ToString();
+            dividedRightLabel.Text = divisor.ToString();
+            quotient.Value = 0;
 
             // Start the timer
             timeLeft = 30;
@@ -74,15 +97,23 @@ namespace JeaninaLao_MathQuiz
             {
                 timeLeft--;
                 timeLabel.Text = timeLeft + " seconds";
+
+                if (timeLeft <= 10)
+                {
+                    timeLabel.BackColor = Color.Red;
+                }
             }
 
             else
             {
                 timer1.Stop();
                 timeLabel.Text = "Time's Up!";
+                timeLabel.BackColor = Color.Black;
                 MessageBox.Show("Sorry, but you didn't finish in time.  Try again.");
                 sum.Value = addend1 + addend2;
                 difference.Value = minuend - subtrahend;
+                product.Value = multiplicand * multiplier;
+                quotient.Value = dividend / divisor;
                 startButton.Enabled = true;
             }
         }
@@ -90,18 +121,12 @@ namespace JeaninaLao_MathQuiz
         // checks math answers
         private bool CheckTheAnswer()
         {
-            if ((addend1 + addend2 == sum.Value) && (minuend - subtrahend == difference.Value))
+            if ((addend1 + addend2 == sum.Value) && (minuend - subtrahend == difference.Value) && 
+                (multiplicand * multiplier == product.Value) && (dividend / divisor == quotient.Value))
                 return true;
             else
                 return false;
             
-        }
-
-
-        // I don't need this stuff
-        public Form1()
-        {
-            InitializeComponent();
         }
 
         private void answer_Enter(object sender, EventArgs e)
@@ -114,5 +139,14 @@ namespace JeaninaLao_MathQuiz
                 answerBox.Select(0, lengthOfAnswer);
             }
         }
+
+
+        // I don't need this stuff
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        
     }
 }
