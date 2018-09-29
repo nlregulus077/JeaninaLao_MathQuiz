@@ -15,6 +15,9 @@ namespace JeaninaLao_MathQuiz
         // New random object
         Random randomizer = new Random();
 
+        // Set date
+        DateTime date = DateTime.Now;
+        
         // Storing addition values
         int addend1;
         int addend2;
@@ -33,6 +36,13 @@ namespace JeaninaLao_MathQuiz
 
         // Timer
         int timeLeft;
+
+        // set the date
+        public void SetDate()
+        {
+            dateLabel.Text = date.ToString("dd MMMM yyyy");
+        }
+
 
         // Start the quiz method
         public void StartTheQuiz()
@@ -145,6 +155,7 @@ namespace JeaninaLao_MathQuiz
         public Form1()
         {
             InitializeComponent();
+            SetDate();
         }
 
         
